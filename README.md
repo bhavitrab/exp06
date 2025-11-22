@@ -43,9 +43,32 @@ The maximum possible groupings of adjacent ones are already shown in the figure.
  
  Developed by: BHAVITRA B RegisterNumber:25012160
 
+ ```
+ module sr_ff (
+    input  wire clk, rst, S, R,
+    output reg  Q
+);
+    always @(posedge clk) begin
+        if (rst)
+            Q <= 1'b0;         // Reset
+        else begin
+            case ({S,R})
+                2'b00: Q <= Q;     // No change
+                2'b01: Q <= 1'b0;  // Reset
+                2'b10: Q <= 1'b1;  // Set
+                2'b11: Q <= 1'bx;  // Invalid
+            endcase
+        end
+    end
+endmodule
+```
+
 
 **RTL LOGIC FOR FLIPFLOPS**
+![alt text](ex06.png)
 
 **TIMING DIGRAMS FOR FLIP FLOPS**
+![alt text](<Screenshot 2025-11-22 185902.png>)
 
 **RESULTS**
+Thus implement SR flipflop using verilog and validating their functionality using their functional tables.
